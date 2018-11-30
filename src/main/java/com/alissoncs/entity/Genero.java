@@ -7,8 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
-@Entity
-public class Deficiencia {
+@Entity(name = "sexo")
+public class Genero {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,9 +17,6 @@ public class Deficiencia {
 	@Column
 	@NotBlank
 	private String nome;
-	
-	@Column
-	private int grau;
 	
 	public Long getId() {
 		return id;
@@ -32,12 +29,6 @@ public class Deficiencia {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	public int getGrau() {
-		return grau;
-	}
-	public void setGrau(int grau) {
-		this.grau = grau;
 	}
 	
 }

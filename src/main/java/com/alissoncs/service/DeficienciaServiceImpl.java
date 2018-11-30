@@ -2,29 +2,33 @@ package com.alissoncs.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alissoncs.entity.Deficiencia;
+import com.alissoncs.repository.DeficienciaRepository;
 
 @Service
 public class DeficienciaServiceImpl implements DeficienciaService {
 
+	@Autowired
+	private DeficienciaRepository repository;
+	
 	@Override
 	public Deficiencia save(Deficiencia item) throws Exception {
-		item.setId(Long.valueOf(1));
+		repository.saveAndFlush(item);
 		return item;
 	}
 
 	@Override
 	public Deficiencia update(Deficiencia item) {
-		// TODO Auto-generated method stub
-		return null;
+		repository.saveAndFlush(item);
+		return item;
 	}
 
 	@Override
 	public List<Deficiencia> fetch() {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findAll();
 	}
 
 	@Override

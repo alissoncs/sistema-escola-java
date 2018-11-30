@@ -39,23 +39,23 @@
         </header>
   
         <main id="content">
-        	<div rendered="#{mainBean.successMessage != null}" class="container">
-        		<div class="col-md-6 col-md-offset-3">	 
-        			<div class="alert alert-danger">       		
+        	<ui:fragment rendered="#{mainBean.successMessage != null}">
+        	<div  class="container">
+        			<div class="alert alert-success">       		
 			       		<h:outputText
 			        		value="#{mainBean.successMessage}" />
 	        		</div>
-        		</div>
        		</div>
+       		</ui:fragment>
        		
-       		<div rendered="#{mainBean.errorMessage != null}" class="container">
-        		<div class="col-md-6 col-md-offset-3">	 
+       		<ui:fragment rendered="#{mainBean.errorMessage != null}">
+       		<div class="container">
         			<div class="alert alert-danger">       		
 		       		<h:outputText
 		        		value="#{mainBean.errorMessage}" />
 	        		</div>
-        		</div>
        		</div>
+       		</ui:fragment>
         	
         	<div class="container">
 				<ui:insert name="content">

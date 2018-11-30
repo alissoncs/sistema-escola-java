@@ -4,12 +4,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
       >
     <h:body>
   
         <ui:composition template="template.xhtml">
         	<ui:define name="content">
-				<p>Conteúdo index</p>
+				<h:form>
+				    <h:panelGrid columns="4" cellpadding="5">
+				        <h:outputLabel for="name" value="Nome: " />
+						<h:inputText value="" styleClass="form-control" /> 
+				        <h:button styleClass="btn btn-success" value="Enviar" />
+				    </h:panelGrid>
+				</h:form>
             </ui:define>
         </ui:composition>
   

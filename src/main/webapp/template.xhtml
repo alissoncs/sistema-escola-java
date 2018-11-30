@@ -4,18 +4,64 @@
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      
       >
   
     <h:head>
+    <link rel="stylesheet"
+    	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     </h:head>
   
     <h:body>
         <header id="header">
-			<h1>h1</h1>
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			  <a class="navbar-brand" href="#">Navbar w/ text</a>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+			  <div class="collapse navbar-collapse" id="navbarText">
+			    <ul class="navbar-nav mr-auto">
+			      <li class="nav-item active">
+			        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="#">Features</a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="#">Pricing</a>
+			      </li>
+			    </ul>
+			    <span class="navbar-text">
+			      Navbar text with an inline element
+			    </span>
+			  </div>
+			</nav>
         </header>
   
         <main id="content">
-			<ui:insert name="content">Main Content</ui:insert>
+        	<div rendered="#{mainBean.successMessage != null}" class="container">
+        		<div class="col-md-6 col-md-offset-3">	 
+        			<div class="alert alert-danger">       		
+			       		<h:outputText
+			        		value="#{mainBean.successMessage}" />
+	        		</div>
+        		</div>
+       		</div>
+       		
+       		<div rendered="#{mainBean.errorMessage != null}" class="container">
+        		<div class="col-md-6 col-md-offset-3">	 
+        			<div class="alert alert-danger">       		
+		       		<h:outputText
+		        		value="#{mainBean.errorMessage}" />
+	        		</div>
+        		</div>
+       		</div>
+        	
+        	<div class="container">
+				<ui:insert name="content">
+					Página
+				</ui:insert>
+			</div>
         </main>
   
         <footer id="footer">

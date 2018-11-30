@@ -1,4 +1,4 @@
-package org.xtremebiker.jsfspring.view;
+package com.alissoncs.view;
 
 import java.util.Map;
 

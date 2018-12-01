@@ -23,22 +23,16 @@ public class DeficienciaBean implements ApplicationContextAware {
     
     private MainBean main;
     
+    // lista de deficiencias
     private List<Deficiencia> lista = new ArrayList<Deficiencia>();
     
     @Autowired
     private DeficienciaService deficienciaService;
 	
+    // campos
 	public String grau;
 	public String nome;
 	
-	public DeficienciaBean() {
-		Deficiencia e = new Deficiencia();
-		e.setId(Long.valueOf(1));
-		e.setNome("Nome aleatorio");
-		e.setGrau(1);
-		this.lista.add(e);
-	}
-
 	public String getGrau() {
 		return grau;
 	}

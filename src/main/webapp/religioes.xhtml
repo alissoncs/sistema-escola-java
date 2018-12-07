@@ -15,15 +15,15 @@
 					<h:form>
 						<div class="form-group">
 							<h:outputLabel for="name" value="Descrição: " />
-							<h:inputText value="#{generoBean.nome}" styleClass="form-control" />
+							<h:inputText value="#{religiaoBean.nome}" styleClass="form-control" />
 						</div>
 						<h:commandButton styleClass="btn btn-success" value="Salvar"
-							action="#{generoBean.salvar}" />
+							action="#{religiaoBean.salvar}" />
 					</h:form>
 				</div>
 
 				<div class="col-md-8">
-					<h3>Lista de gêneros</h3>
+					<h3>Lista de religiões</h3>
 					<hr />
 					<table class="table table-striped">
 						<thead>
@@ -34,7 +34,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<ui:repeat value="#{generoBean.lista}" var="item">
+							<ui:repeat value="#{religiaoBean.lista}" var="item">
 								<tr>
 									<td><h:outputText value="#{item.id}" /></td>
 									<td><h:outputText value="#{item.nome}" /></td>

@@ -14,30 +14,55 @@
 				<div class="col-md-4">
 					<h:form>
 						<div class="form-group">
-							<h:outputLabel for="name" value="Descrição: " />
-							<h:inputText value="#{etniaBean.nome}" styleClass="form-control" />
+							<h:outputLabel for="name" value="Pessoa: " />
+							<select class="form-control"
+								value = "#{alunoBean.pessoaId}">
+								<ui:repeat value="#{alunoBean.pessoas}" var="item">
+									<option value='#{item.id}'>#{item.nome}</option>
+								</ui:repeat>
+							</select> 	
+							<div class="form-group">
+								<h:outputLabel for="name" value="Forma de pagamento: " />
+								<h:inputText value="#{alunoBean.formaPagamento}" styleClass="form-control" />
+							</div>
+							<!-- <ui:repeat value="#{alunoBean.lista}" var="item">
+								<tr>
+									<td>
+										<h:outputText value="#{item.id}"/>
+									</td>
+									<td>
+										<h:outputText value="#{item.nome}"/>
+									</td>
+									<td>
+										<h:outputText value="#{item.grau}"/>
+									</td>
+									<td></td>
+								</tr>
+							</ui:repeat> -->
 						</div>
 						<h:commandButton styleClass="btn btn-success" value="Salvar"
-							action="#{etniaBean.salvar}" />
+							action="#{alunoBean.salvar}" />
 					</h:form>
 				</div>
 
 				<div class="col-md-8">
-					<h3>Lista de Etnias</h3>
+					<h3>Lista de alunos</h3>
 					<hr />
 					<table class="table table-striped">
 						<thead>
 							<tr>
 								<th scope="col">#</th>
 								<th scope="col">Nome</th>
+								<th scope="col">Forma pgto</th>
 								<th scope="col"></th>
 							</tr>
 						</thead>
 						<tbody>
-							<ui:repeat value="#{etniaBean.lista}" var="item">
+							<ui:repeat value="#{alunoBean.lista}" var="item">
 								<tr>
 									<td><h:outputText value="#{item.id}" /></td>
-									<td><h:outputText value="#{item.nome}" /></td>
+									<!-- <td><h:outputText value="" /></td> -->
+									<td></td>
 									<td></td>
 								</tr>
 							</ui:repeat>

@@ -21,7 +21,7 @@ public class Aluno {
 	
 	@Column
 	@NotBlank
-	private String formaPagameno;
+	private String formaPagamento;
 
 	public Pessoa getPessoa() {
 		return pessoa;
@@ -32,11 +32,11 @@ public class Aluno {
 	}
 
 	public String getFormaPagameno() {
-		return formaPagameno;
+		return formaPagamento;
 	}
 
-	public void setFormaPagameno(String formaPagameno) {
-		this.formaPagameno = formaPagameno;
+	public void setFormaPagamento(String formaPagameno) {
+		this.formaPagamento = formaPagameno;
 	}
 	public Long getId() {
 		return id;

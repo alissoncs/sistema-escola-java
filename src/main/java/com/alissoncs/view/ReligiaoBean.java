@@ -12,22 +12,22 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.alissoncs.entity.Etnia;
-import com.alissoncs.service.EtniaService;
+import com.alissoncs.entity.Religiao;
+import com.alissoncs.service.ReligiaoService;
 
 @Component
 @Scope("view")
-public class EtniaBean implements ApplicationContextAware {
+public class ReligiaoBean implements ApplicationContextAware {
 	
     private ApplicationContext context;
     
     private MainBean main;
     
-    // lista de Etnias
-    private List<Etnia> lista = new ArrayList<Etnia>();
+    // lista de Religiaos
+    private List<Religiao> lista = new ArrayList<Religiao>();
     
     @Autowired
-    private EtniaService etniaService;
+    private ReligiaoService religiaoService;
 	
     // campos
 	public String nome;
@@ -39,18 +39,18 @@ public class EtniaBean implements ApplicationContextAware {
 		this.nome = nome;
 	}
 	
-	public List<Etnia> getLista() {
+	public List<Religiao> getLista() {
 		return this.lista;
 	}
-	public void setLista(List<Etnia> lista) {
+	public void setLista(List<Religiao> lista) {
 		this.lista = lista;
 	}
 	
 	@PostConstruct
 	public void carregarLista() {
 		try {
-			List<Etnia> lista = etniaService.fetch();
-			System.out.println("[Carregar Etnia] size: " + lista.size());
+			List<Religiao> lista = religiaoService.fetch();
+			System.out.println("[Carregar Religiao] size: " + lista.size());
 			this.setLista(lista);
 		} catch (Exception e) {
 			this.main.setErrorMessage(e.getMessage());
@@ -58,16 +58,16 @@ public class EtniaBean implements ApplicationContextAware {
 	}
 	
 	public void salvar() {
-		System.out.println("[Salvar Etnia] nome: " + this.nome);
+		System.out.println("[Salvar Religiao] nome: " + this.nome);
 		
-		Etnia d = new Etnia();
+		Religiao d = new Religiao();
 		d.setNome(this.nome);
 		
 		try {
-			d = etniaService.save(d);
+			d = religiaoService.save(d);
 			this.nome = "";
 			this.main.setSuccessMessage("OK");
-			this.lista = etniaService.fetch();
+			this.lista = religiaoService.fetch();
 		} catch (Exception ex) {
 			this.main.setErrorMessage(ex.getMessage());
 		}

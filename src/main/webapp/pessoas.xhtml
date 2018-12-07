@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:c="http://java.sun.com/jsf/jstl/core"
+      xmlns:c="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       >
       
@@ -17,16 +17,40 @@
 					<h:form>
 						<div class="form-group">
 				        	<h:outputLabel for="name" value="Descrição: " />
-							<h:inputText value="#{deficienciaBean.nome}" styleClass="form-control" />
+							<h:inputText value="#{pessoaBean.nome}" styleClass="form-control" />
 						</div>
 						<div class="form-group">
-				        	<h:outputLabel for="grau" value="Grau: " />
-							<h:inputText value="#{deficienciaBean.grau}" styleClass="form-control" />
-						</div>  
+							<h:outputLabel for="name" value="Religião: " />
+							
+							<h:selectOneMenu styleClass="form-control" value = "#{pessoaBean.religiaoId}"> 
+									<c:selectItems var="item"
+									value="#{pessoaBean.religioes}"
+									itemValue = "#{item.id}" itemLabel = "#{item.nome}" />
+							</h:selectOneMenu> 	
+						</div>
+						<div class="form-group">
+							<h:outputLabel for="name" value="Genero: " />
+							
+							<h:selectOneMenu styleClass="form-control" value = "#{pessoaBean.generoId}"> 
+									<c:selectItems var="item"
+									value="#{pessoaBean.generos}"
+									itemValue = "#{item.id}" itemLabel = "#{item.nome}" />
+							</h:selectOneMenu> 	
+						</div>
+						<div class="form-group">
+								<h:outputLabel for="name" value="Etnia: " />
+							 	
+								<h:selectOneMenu styleClass="form-control" value = "#{pessoaBean.etniaId}"> 
+									 <c:selectItems var="item"
+									 	value="#{pessoaBean.etnias}"
+									 	itemValue = "#{item.id}" itemLabel = "#{item.nome}" />
+								</h:selectOneMenu> 	
+							</div>
+						
 				        <h:commandButton
 				        	styleClass="btn btn-success"
 				        	value="Salvar"
-				        	action="#{deficienciaBean.salvar}"/>
+				        	action="#{pessoaBean.salvar}"/>
 					</h:form>
 				</div>
 				
@@ -38,12 +62,12 @@
 						    <tr>
 						      <th scope="col">#</th>
 						      <th scope="col">Nome</th>
-						      <th scope="col">Grau</th>
+						      <th scope="col">Etnia</th>
 						      <th scope="col"></th>
 						    </tr>
 						</thead>
 						<tbody>
-					<ui:repeat value="#{deficienciaBean.lista}" var="item">
+					<ui:repeat value="#{pessoaBean.pessoas}" var="item">
 						<tr>
 							<td>
 								<h:outputText value="#{item.id}"/>
@@ -51,9 +75,7 @@
 							<td>
 								<h:outputText value="#{item.nome}"/>
 							</td>
-	                   		<td>
-	                   			<h:outputText value="#{item.grau}"/>
-	                   		</td>
+	                   		<td></td>
 	                   		<td></td>
 	                   	</tr>
 	            	</ui:repeat>

@@ -18,6 +18,7 @@ import com.alissoncs.entity.Pessoa;
 import com.alissoncs.entity.Religiao;
 import com.alissoncs.service.EtniaService;
 import com.alissoncs.service.GeneroService;
+import com.alissoncs.service.PessoaService;
 import com.alissoncs.service.ReligiaoService;
 
 @Component
@@ -42,6 +43,9 @@ public class PessoaBean implements ApplicationContextAware {
 	
     @Autowired
     private GeneroService generoService;
+    
+    @Autowired
+    private PessoaService pessoaService;
     
     // campos
 	public String nome;
@@ -114,18 +118,34 @@ public class PessoaBean implements ApplicationContextAware {
 	}
 	
 	public void salvar() {
-		System.out.println("[Salvar Pessoa] nome: " + this.nome + ", etniaId: " + this.etniaId);
+		System.out.println("[Salvar Pessoa] " + 
+				"nome: "+ this.nome +
+				", etniaId: " + this.etniaId +
+				", generoId: " + this.generoId +
+				", religiaoId: " + this.religiaoId);
 		
-//		Etnia d = new Etnia();
-//		d.setNome(this.nome);
-//		
-//		try {
-//			d = etniaService.save(d);
-//			this.nome = "";
-//			this.main.setSuccessMessage("OK");
-//		} catch (Exception ex) {
-//			this.main.setErrorMessage(ex.getMessage());
-//		}
+		Pessoa pessoa = new Pessoa();
+		pessoa.setNome(this.nome);
+		
+		Etnia etnia = new Etnia();
+		etnia.setId(Long.parseLong(this.etniaId));
+		pessoa.setEtnia(etnia);
+		
+		Religiao religiao = new Religiao();
+		religiao.setId(Long.parseLong(this.religiaoId));
+		pessoa.setReligiao(religiao);
+		
+		Genero genero = new Genero();
+		genero.setId(Long.parseLong(this.generoId));
+		pessoa.setGenero(genero);
+
+		try {
+			pessoaService.save(pessoa);
+			this.nome = "";
+			this.main.setSuccessMessage("OK");
+		} catch (Exception ex) {
+			this.main.setErrorMessage(ex.getMessage());
+		}
 	}
 
 	@Override

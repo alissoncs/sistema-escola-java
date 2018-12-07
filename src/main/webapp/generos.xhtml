@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsf/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="template.xhtml">
+		<ui:define name="content">
+			<div class="row">
+				<div class="col-md-4">
+					<h:form>
+						<div class="form-group">
+							<h:outputLabel for="name" value="Descrição: " />
+							<h:inputText value="#{generoBean.nome}" styleClass="form-control" />
+						</div>
+						<h:commandButton styleClass="btn btn-success" value="Salvar"
+							action="#{generoBean.salvar}" />
+					</h:form>
+				</div>
+
+				<div class="col-md-8">
+					<h3>Lista de gêneros</h3>
+					<hr />
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Nome</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<ui:repeat value="#{generoBean.lista}" var="item">
+								<tr>
+									<td><h:outputText value="#{item.id}" /></td>
+									<td><h:outputText value="#{item.nome}" /></td>
+									<td></td>
+								</tr>
+							</ui:repeat>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+
+</html>

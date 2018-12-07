@@ -6,46 +6,47 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alissoncs.entity.Deficiencia;
-import com.alissoncs.repository.DeficienciaRepository;
+import com.alissoncs.entity.Etnia;
+import com.alissoncs.entity.Genero;
+import com.alissoncs.repository.EtniaRepository;
 
 @Service
-public class DeficienciaServiceImpl implements DeficienciaService {
+public class EtniaServiceImpl implements EtniaService {
 
 	@Autowired
-	private DeficienciaRepository repository;
+	private EtniaRepository repository;
 	
 	@Override
-	public Deficiencia save(Deficiencia item) throws Exception {
+	public Etnia save(Etnia item) throws Exception {
 		repository.saveAndFlush(item);
 		return item;
 	}
 
 	@Override
-	public Deficiencia update(Deficiencia item) {
+	public Etnia update(Etnia item) {
 		repository.saveAndFlush(item);
 		return item;
 	}
 
 	@Override
-	public List<Deficiencia> fetch() {
+	public List<Etnia> fetch() {
 		return repository.findAll();
 	}
 
 	@Override
-	public List<Deficiencia> fetchFilter(String param) {
+	public List<Etnia> fetchFilter(String param) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void delete(Deficiencia item) {
+	public void delete(Etnia item) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public Optional<Deficiencia> find(Long id) {
+	public Optional<Etnia> find(Long id) {
 		return repository.findById(id);
 	}
 

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="template.xhtml">
+		<ui:define name="content">
+			<div class="row">
+				<div class="col-md-4">
+					<h:form>
+						<div class="form-group">
+							<h:outputLabel for="name" value="Turma " />
+
+							<h:selectOneMenu styleClass="form-control" value = "#{matriculaBean.turmaId}"> 
+									<c:selectItems var="item"
+									value="#{matriculaBean.turmas}"
+									itemValue = "#{item.id}" itemLabel = "#{item.nome}" />
+							</h:selectOneMenu> 	
+						</div>
+						<div class="form-group">
+							<h:outputLabel for="name" value="Aluno " />
+
+							<h:selectOneMenu styleClass="form-control" value = "#{matriculaBean.alunoId}"> 
+									<c:selectItems var="item"
+									value="#{matriculaBean.alunos}"
+									itemValue = "#{item.id}" itemLabel = "#{item.pessoa.nome}" />
+							</h:selectOneMenu> 	
+						</div>
+						<h:commandButton styleClass="btn btn-success" value="Salvar"
+							action="#{matriculaBean.salvar}" />
+					</h:form>
+				</div>
+
+				<div class="col-md-8">
+					<h3>Lista de matriculas</h3>
+					<hr />
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Nome</th>
+								<th scope="col">Turma</th>
+							</tr>
+						</thead>
+						<tbody>
+							<ui:repeat value="#{matriculaBean.matriculas}" var="item">
+								<tr>
+									<td><h:outputText value="#{item.id}" /></td>
+									<td><h:outputText value="#{item.aluno.pessoa.nome}" /></td>
+									<td><h:outputText value="#{item.turma.nome}" /></td>
+								</tr>
+							</ui:repeat>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+
+</html>

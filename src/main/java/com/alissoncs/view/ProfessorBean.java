@@ -12,24 +12,24 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.alissoncs.entity.Aluno;
+import com.alissoncs.entity.Professor;
 import com.alissoncs.entity.Pessoa;
-import com.alissoncs.service.AlunoService;
+import com.alissoncs.service.ProfessorService;
 import com.alissoncs.service.PessoaService;
 
 @Component
 @Scope("view")
-public class AlunoBean implements ApplicationContextAware {
+public class ProfessorBean implements ApplicationContextAware {
 	
     private ApplicationContext context;
     
     private MainBean main;
     
-    // lista de Alunos
-    private List<Aluno> lista = new ArrayList<Aluno>();
+    // lista de Professors
+    private List<Professor> lista = new ArrayList<Professor>();
     
     @Autowired
-    private AlunoService alunoService;
+    private ProfessorService alunoService;
     
     @Autowired
     private PessoaService pessoaService;
@@ -39,15 +39,15 @@ public class AlunoBean implements ApplicationContextAware {
 
 	public String pessoaId;
 	
-	public String formaPagamento;
+	public String formacao;
 	
 	public List<Pessoa> pessoas;
 	
-	public String getFormaPagamento() {
-		return formaPagamento;
+	public String getFormacao() {
+		return formacao;
 	}
-	public void setFormaPagamento(String formaPagamento) {
-		this.formaPagamento = formaPagamento;
+	public void setFormacao(String formacao) {
+		this.formacao = formacao;
 	}
 	public String getNome() {
 		return nome;
@@ -62,10 +62,10 @@ public class AlunoBean implements ApplicationContextAware {
 		this.pessoaId = id;
 	}
 
-	public List<Aluno> getLista() {
+	public List<Professor> getLista() {
 		return this.lista;
 	}
-	public void setLista(List<Aluno> lista) {
+	public void setLista(List<Professor> lista) {
 		this.lista = lista;
 	}
 	
@@ -77,10 +77,11 @@ public class AlunoBean implements ApplicationContextAware {
 	}
 	@PostConstruct
 	public void carregarLista() {
+		this.main.clear();
 		try {
-			List<Aluno> lista = alunoService.fetch();
+			List<Professor> lista = alunoService.fetch();
 			
-			System.out.println("[Carregar Aluno] size: " + lista.size());
+			System.out.println("[Carregar Professor] size: " + lista.size());
 			this.setLista(lista);
 			
 			this.setPessoas(pessoaService.fetch());
@@ -92,10 +93,10 @@ public class AlunoBean implements ApplicationContextAware {
 	}
 	
 	public void salvar() {
-		System.out.println("[Salvar Aluno] pessoaId: " + this.pessoaId);
+		System.out.println("[Salvar Professor] pessoaId: " + this.pessoaId);
 		
-		Aluno d = new Aluno();
-		d.setFormaPagamento(this.formaPagamento);
+		Professor d = new Professor();
+		d.setFormacao(this.formacao);
 		Pessoa pessoa = new Pessoa();
 		pessoa.setId(Long.parseLong(this.pessoaId));
 		d.setPessoa(pessoa);
@@ -103,7 +104,7 @@ public class AlunoBean implements ApplicationContextAware {
 		try {
 			d = alunoService.save(d);
 			
-			this.formaPagamento = null;
+			this.formacao = null;
 			this.setPessoaId(null);
 			this.main.setSuccessMessage("OK");
 			this.lista = alunoService.fetch();

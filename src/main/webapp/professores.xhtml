@@ -15,25 +15,25 @@
 						<div class="form-group">
 							<h:outputLabel for="name" value="Pessoa: " />
 
-							<h:selectOneMenu styleClass="form-control" value = "#{alunoBean.pessoaId}"> 
+							<h:selectOneMenu styleClass="form-control" value = "#{professorBean.pessoaId}"> 
 									<c:selectItems var="item"
-									value="#{alunoBean.pessoas}"
+									value="#{professorBean.pessoas}"
 									itemValue = "#{item.id}" itemLabel = "#{item.nome}" />
 							</h:selectOneMenu> 	
 							</div>
 							
 							<div class="form-group">
-								<h:outputLabel for="name" value="Forma de pagamento: " />
-								<h:inputText value="#{alunoBean.formaPagamento}" styleClass="form-control" />
+								<h:outputLabel for="name" value="Formação: " />
+								<h:inputText value="#{professorBean.formacao}" styleClass="form-control" />
 							</div>
 							
 						<h:commandButton styleClass="btn btn-success" value="Salvar"
-							action="#{alunoBean.salvar}" />
+							action="#{professorBean.salvar}" />
 					</h:form>
 				</div>
 
 				<div class="col-md-8">
-					<h3>Lista de alunos</h3>
+					<h3>Lista de profesores</h3>
 					<hr />
 					<table class="table table-striped">
 						<thead>
@@ -45,11 +45,11 @@
 							</tr>
 						</thead>
 						<tbody>
-							<ui:repeat value="#{alunoBean.lista}" var="item">
+							<ui:repeat value="#{professorBean.lista}" var="item">
 								<tr>
 									<td><h:outputText value="#{item.id}" /></td>
 									<td><h:outputText value="#{item.pessoa.nome}" /></td>
-									<td><h:outputText value="#{item.formaPagamento}" /></td>
+									<td><h:outputText value="#{item.formacao}" /></td>
 									<td></td>
 								</tr>
 							</ui:repeat>

@@ -46,6 +46,15 @@
 									 	itemValue = "#{item.id}" itemLabel = "#{item.nome}" />
 								</h:selectOneMenu> 	
 							</div>
+						<div class="form-group">
+								<h:outputLabel for="name" value="Deficiencias: " />
+							 	
+								<h:selectManyListbox styleClass="form-control" value = "#{pessoaBean.deficienciasId}"> 
+									 <c:selectItems var="item"
+									 	value="#{pessoaBean.deficiencias}"
+									 	itemValue = "#{item.id}" itemLabel = "#{item.nome}" />
+								</h:selectManyListbox> 	
+							</div>
 						
 				        <h:commandButton
 				        	styleClass="btn btn-success"
@@ -62,7 +71,6 @@
 						    <tr>
 						      <th scope="col">#</th>
 						      <th scope="col">Nome</th>
-						      <th scope="col">Etnia</th>
 						      <th scope="col"></th>
 						    </tr>
 						</thead>
@@ -75,7 +83,6 @@
 							<td>
 								<h:outputText value="#{item.nome}"/>
 							</td>
-	                   		<td></td>
 	                   		<td></td>
 	                   	</tr>
 	            	</ui:repeat>

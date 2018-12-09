@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:c="http://java.sun.com/jsf/core">
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:body>
 	<ui:composition template="template.xhtml">
@@ -13,43 +14,34 @@
 				<div class="col-md-4">
 					<h:form>
 						<div class="form-group">
-							<h:outputLabel for="name" value="Pessoa: " />
-
-							<h:selectOneMenu styleClass="form-control" value = "#{alunoBean.pessoaId}"> 
-									<c:selectItems var="item"
-									value="#{alunoBean.pessoas}"
-									itemValue = "#{item.id}" itemLabel = "#{item.nome}" />
-							</h:selectOneMenu> 	
-							</div>
-							
-							<div class="form-group">
-								<h:outputLabel for="name" value="Forma de pagamento: " />
-								<h:inputText value="#{alunoBean.formaPagamento}" styleClass="form-control" />
-							</div>
-							
+							<h:outputLabel for="name" value="Descrição: " />
+							<h:inputText value="#{produtoBean.nome}" styleClass="form-control" />
+						</div>
+						<div class="form-group">
+							<h:outputLabel for="name" value="Preço: " />
+							<h:inputText value="#{produtoBean.valor}" styleClass="form-control" />
+						</div>
 						<h:commandButton styleClass="btn btn-success" value="Salvar"
-							action="#{alunoBean.salvar}" />
+							action="#{produtoBean.salvar}" />
 					</h:form>
 				</div>
 
 				<div class="col-md-8">
-					<h3>Lista de alunos</h3>
+					<h3>Lista de produtos</h3>
 					<hr />
 					<table class="table table-striped">
 						<thead>
 							<tr>
 								<th scope="col">#</th>
 								<th scope="col">Nome</th>
-								<th scope="col">Forma pgto</th>
 								<th scope="col"></th>
 							</tr>
 						</thead>
 						<tbody>
-							<ui:repeat value="#{alunoBean.lista}" var="item">
+							<ui:repeat value="#{produtoBean.lista}" var="item">
 								<tr>
 									<td><h:outputText value="#{item.id}" /></td>
-									<td><h:outputText value="#{item.pessoa.nome}" /></td>
-									<td><h:outputText value="#{item.formaPagamento}" /></td>
+									<td><h:outputText value="#{item.nome}" /></td>
 									<td></td>
 								</tr>
 							</ui:repeat>

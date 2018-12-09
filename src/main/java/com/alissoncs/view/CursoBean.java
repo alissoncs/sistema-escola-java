@@ -13,32 +13,26 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.alissoncs.entity.Deficiencia;
-import com.alissoncs.service.DeficienciaService;
+import com.alissoncs.entity.Curso;
+import com.alissoncs.service.CursoService;
 
 @Component
 @Scope("view")
-public class DeficienciaBean implements ApplicationContextAware {
+public class CursoBean implements ApplicationContextAware {
 	
     private ApplicationContext context;
     
     private MainBean main;
     
     // lista de deficiencias
-    private List<Deficiencia> lista = new ArrayList<Deficiencia>();
+    private List<Curso> lista = new ArrayList<Curso>();
     
     @Autowired
-    private DeficienciaService deficienciaService;
+    private CursoService generoService;
 	
     // campos
-	public String grau;
 	public String nome;
 	
-	public String getGrau() {
-		return grau;
-	}
-	public void setGrau(String grau) {
-		this.grau = grau;
-	}
 	public String getNome() {
 		return nome;
 	}
@@ -46,19 +40,18 @@ public class DeficienciaBean implements ApplicationContextAware {
 		this.nome = nome;
 	}
 	
-	public List<Deficiencia> getLista() {
+	public List<Curso> getLista() {
 		return this.lista;
 	}
-	public void setLista(List<Deficiencia> lista) {
+	public void setLista(List<Curso> lista) {
 		this.lista = lista;
 	}
 	
 	@PostConstruct
 	public void carregarLista() {
-		this.main.clear();
 		try {
-			List<Deficiencia> lista = deficienciaService.fetch();
-			System.out.println("[Carregar Deficiencia] size: " + lista.size());
+			List<Curso> lista = generoService.fetch();
+			System.out.println("[Carregar Curso] size: " + lista.size());
 			this.setLista(lista);
 		} catch (Exception e) {
 			this.main.setErrorMessage(e.getMessage());
@@ -66,22 +59,15 @@ public class DeficienciaBean implements ApplicationContextAware {
 	}
 	
 	public void salvar() {
-		System.out.println("[Salvar Deficiencia] nome: " + this.nome +
-				", grau: " + this.grau);
+		System.out.println("[Salvar Curso] nome: " + this.nome);
 		
-		Deficiencia d = new Deficiencia();
+		Curso d = new Curso();
 		d.setNome(this.nome);
 		try {
-			d.setGrau(Integer.parseInt(this.grau));
-		} catch (Exception e) {	
-		}
-		
-		try {
-			d = deficienciaService.save(d);
+			d = generoService.save(d);
 			this.nome = "";
-			this.grau = "";
 			this.main.setSuccessMessage("OK");
-			this.lista = deficienciaService.fetch();
+			this.lista = generoService.fetch();
 		} catch (Exception ex) {
 			this.main.setErrorMessage(ex.getMessage());
 		}

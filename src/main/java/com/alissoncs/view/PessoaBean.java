@@ -12,10 +12,12 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.alissoncs.entity.Deficiencia;
 import com.alissoncs.entity.Etnia;
 import com.alissoncs.entity.Genero;
 import com.alissoncs.entity.Pessoa;
 import com.alissoncs.entity.Religiao;
+import com.alissoncs.service.DeficienciaService;
 import com.alissoncs.service.EtniaService;
 import com.alissoncs.service.GeneroService;
 import com.alissoncs.service.PessoaService;
@@ -34,6 +36,7 @@ public class PessoaBean implements ApplicationContextAware {
     private List<Religiao> religioes = new ArrayList<Religiao>();
     private List<Genero> generos = new ArrayList<Genero>();
     private List<Pessoa> pessoas = new ArrayList<Pessoa>();
+    private List<Deficiencia> deficiencias = new ArrayList<Deficiencia>();
     
     @Autowired
     private EtniaService etniaService;
@@ -47,14 +50,30 @@ public class PessoaBean implements ApplicationContextAware {
     @Autowired
     private PessoaService pessoaService;
     
+    @Autowired
+    private DeficienciaService deficienciaService;
+    
     // campos
 	public String nome;
 	
 	public String etniaId;
 	public String religiaoId;
 	public String generoId;
+	public List<String> deficienciasId;
 	
-
+	
+	public List<Deficiencia> getDeficiencias() {
+		return deficiencias;
+	}
+	public void setDeficiencias(List<Deficiencia> deficiencias) {
+		this.deficiencias = deficiencias;
+	}
+	public List<String> getDeficienciasId() {
+		return deficienciasId;
+	}
+	public void setDeficienciasId(List<String> deficienciasId) {
+		this.deficienciasId = deficienciasId;
+	}
 	public List<Religiao> getReligioes() {
 		return religioes;
 	}
@@ -111,6 +130,8 @@ public class PessoaBean implements ApplicationContextAware {
 			this.setEtnias(etniaService.fetch());
 			this.setGeneros(generoService.fetch());
 			this.setReligioes(religiaoService.fetch());
+			this.setPessoas(pessoaService.fetch());
+			this.setDeficiencias(deficienciaService.fetch());
 			
 		} catch (Exception e) {
 			this.main.setErrorMessage(e.getMessage());
@@ -141,7 +162,15 @@ public class PessoaBean implements ApplicationContextAware {
 
 		try {
 			pessoaService.save(pessoa);
-			this.nome = "";
+
+			// limpa
+			this.setNome("");
+			this.setEtniaId(null);
+			this.setGeneroId(null);
+			this.setReligiaoId(null);
+			this.setDeficienciasId(new ArrayList<String>());
+			
+			this.getPessoas().add(pessoa);
 			this.main.setSuccessMessage("OK");
 		} catch (Exception ex) {
 			this.main.setErrorMessage(ex.getMessage());

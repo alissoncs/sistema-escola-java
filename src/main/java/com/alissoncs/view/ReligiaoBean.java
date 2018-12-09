@@ -48,6 +48,7 @@ public class ReligiaoBean implements ApplicationContextAware {
 	
 	@PostConstruct
 	public void carregarLista() {
+		this.main.clear();
 		try {
 			List<Religiao> lista = religiaoService.fetch();
 			System.out.println("[Carregar Religiao] size: " + lista.size());

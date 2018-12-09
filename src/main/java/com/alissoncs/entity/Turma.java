@@ -76,4 +76,22 @@ public class Turma {
 	public void setDataFim(LocalDate dataFim) {
 		this.dataFim = dataFim;
 	}
+
+	public Boolean getBloquear() {
+		return bloquear;
+	}
+
+	public void setBloquear(Boolean bloquear) {
+		this.bloquear = bloquear;
+	}
+
+	public Curso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
+	
+	
 }

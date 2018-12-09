@@ -48,6 +48,7 @@ public class EtniaBean implements ApplicationContextAware {
 	
 	@PostConstruct
 	public void carregarLista() {
+		this.main.clear();
 		try {
 			List<Etnia> lista = etniaService.fetch();
 			System.out.println("[Carregar Etnia] size: " + lista.size());

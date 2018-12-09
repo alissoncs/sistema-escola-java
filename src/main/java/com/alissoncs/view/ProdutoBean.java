@@ -12,33 +12,35 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.alissoncs.entity.Deficiencia;
-import com.alissoncs.service.DeficienciaService;
+import com.alissoncs.entity.Produto;
+import com.alissoncs.service.ProdutoService;
 
 @Component
 @Scope("view")
-public class DeficienciaBean implements ApplicationContextAware {
+public class ProdutoBean implements ApplicationContextAware {
 	
     private ApplicationContext context;
     
     private MainBean main;
     
-    // lista de deficiencias
-    private List<Deficiencia> lista = new ArrayList<Deficiencia>();
+    // lista de Produtos
+    private List<Produto> lista = new ArrayList<Produto>();
     
     @Autowired
-    private DeficienciaService deficienciaService;
+    private ProdutoService produtoService;
 	
     // campos
-	public String grau;
 	public String nome;
-	
-	public String getGrau() {
-		return grau;
+
+	private String valor;
+
+	public String getValor() {
+		return valor;
 	}
-	public void setGrau(String grau) {
-		this.grau = grau;
+	public void setValor(String nome) {
+		this.valor = nome;
 	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -46,10 +48,10 @@ public class DeficienciaBean implements ApplicationContextAware {
 		this.nome = nome;
 	}
 	
-	public List<Deficiencia> getLista() {
+	public List<Produto> getLista() {
 		return this.lista;
 	}
-	public void setLista(List<Deficiencia> lista) {
+	public void setLista(List<Produto> lista) {
 		this.lista = lista;
 	}
 	
@@ -57,8 +59,8 @@ public class DeficienciaBean implements ApplicationContextAware {
 	public void carregarLista() {
 		this.main.clear();
 		try {
-			List<Deficiencia> lista = deficienciaService.fetch();
-			System.out.println("[Carregar Deficiencia] size: " + lista.size());
+			List<Produto> lista = produtoService.fetch();
+			System.out.println("[Carregar Produto] size: " + lista.size());
 			this.setLista(lista);
 		} catch (Exception e) {
 			this.main.setErrorMessage(e.getMessage());
@@ -66,22 +68,17 @@ public class DeficienciaBean implements ApplicationContextAware {
 	}
 	
 	public void salvar() {
-		System.out.println("[Salvar Deficiencia] nome: " + this.nome +
-				", grau: " + this.grau);
+		System.out.println("[Salvar Produto] nome: " + this.nome);
 		
-		Deficiencia d = new Deficiencia();
+		Produto d = new Produto();
 		d.setNome(this.nome);
-		try {
-			d.setGrau(Integer.parseInt(this.grau));
-		} catch (Exception e) {	
-		}
+		d.setValor(Float.parseFloat(this.getValor()));
 		
 		try {
-			d = deficienciaService.save(d);
+			d = produtoService.save(d);
 			this.nome = "";
-			this.grau = "";
 			this.main.setSuccessMessage("OK");
-			this.lista = deficienciaService.fetch();
+			this.lista = produtoService.fetch();
 		} catch (Exception ex) {
 			this.main.setErrorMessage(ex.getMessage());
 		}

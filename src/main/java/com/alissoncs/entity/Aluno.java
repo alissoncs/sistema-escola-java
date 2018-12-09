@@ -31,7 +31,7 @@ public class Aluno {
 		this.pessoa = pessoa;
 	}
 
-	public String getFormaPagameno() {
+	public String getFormaPagamento() {
 		return formaPagamento;
 	}
 

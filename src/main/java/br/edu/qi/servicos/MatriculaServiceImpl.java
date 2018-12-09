@@ -1,0 +1,52 @@
+package br.edu.qi.servicos;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import br.edu.qi.dao.MatriculaDAO;
+import br.edu.qi.entidade.Matricula;
+
+@Service
+public class MatriculaServiceImpl implements MatriculaService {
+
+	@Autowired
+	private MatriculaDAO repository;
+	
+	@Override
+	public Matricula save(Matricula item) throws Exception {
+		repository.saveAndFlush(item);
+		return item;
+	}
+
+	@Override
+	public Matricula update(Matricula item) {
+		repository.saveAndFlush(item);
+		return item;
+	}
+
+	@Override
+	public List<Matricula> fetch() {
+		return repository.findAll();
+	}
+
+	@Override
+	public List<Matricula> fetchFilter(String param) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(Matricula item) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Optional<Matricula> find(Long id) {
+		return repository.findById(id);
+	}
+
+}
